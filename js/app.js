@@ -26,20 +26,22 @@ document.addEventListener('DOMContentLoaded', function () {
     renderSearchHistory();
 
     // 设置默认API选择（如果是第一次加载）
-    if (!localStorage.getItem('hasInitializedDefaults')) {
-        // 默认选中资源
-        selectedAPIs = ["tyyszy", "bfzy", "dyttzy", "ruyi"];
-        localStorage.setItem('selectedAPIs', JSON.stringify(selectedAPIs));
+        if (!localStorage.getItem('hasInitializedDefaults')) {
+    // 全选所有 API（并会自动更新 selectedAPIs + 本地存储）
+    selectAllAPIs(true);
 
-        // 默认选中过滤开关
-        localStorage.setItem('yellowFilterEnabled', 'true');
-        localStorage.setItem(PLAYER_CONFIG.adFilteringStorage, 'true');
+    // ✅ 不需要手动设置 selectedAPIs 到 localStorage，这一步是多余的
+    // localStorage.setItem('selectedAPIs', JSON.stringify(selectedAPIs));  ❌ 多余！可以删掉
 
-        // 默认启用豆瓣功能
-        localStorage.setItem('doubanEnabled', 'true');
+    // 默认选中过滤开关
+    localStorage.setItem('yellowFilterEnabled', 'true');
+    localStorage.setItem(PLAYER_CONFIG.adFilteringStorage, 'true');
 
-        // 标记已初始化默认值
-        localStorage.setItem('hasInitializedDefaults', 'true');
+    // 默认启用豆瓣功能
+    localStorage.setItem('doubanEnabled', 'true');
+
+    // 标记初始化完成
+    localStorage.setItem('hasInitializedDefaults', 'true');
     }
 
     // 设置黄色内容过滤器开关初始状态
